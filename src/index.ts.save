@@ -1,0 +1,12 @@
+import React from 'react'; import ReactDOM from 'react-dom''
+
+
+;
+exit
+
+import TodoApp from './components/TodoApp';
+
+ReactDOM.render(
+  <div></div>
+  ,document.getElementById('root'),
+);
