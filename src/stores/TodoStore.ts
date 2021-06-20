@@ -25,10 +25,10 @@ var TodoStore = assign({}, EventEmitter.prototype, {
   emitChange() {
     ev.emit("change")
   },
-  addChangeLister(callback: any) {
+  addChangeListener(callback: any) {
     ev.on("change", callback)
   },
-  removeEventListener(callback: any) {
+  removeChangeListener(callback: any) {
     ev.removeListener("change", callback)
   }
 })

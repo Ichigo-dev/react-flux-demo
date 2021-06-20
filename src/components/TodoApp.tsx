@@ -3,7 +3,8 @@ import TodoStore from '../stores/TodoStore';
 import TodoActions from '../actions/TodoActions';
 
 var getTodoState = () => {
-  return TodoStore.getAll();
+  var tmp = TodoStore.getAll();
+  return tmp
 };
 
 const TodoApp = () => {
@@ -11,12 +12,8 @@ const TodoApp = () => {
   const [todos, setTodos] = useState(getTodoState);
 
   useEffect(() => {
-    TodoStore.addChangeLister(() => { _onChange() });
-  }, [])
-
-  const componentWillUnmount = () => {
-    TodoStore.removeEventListener(_onChange());
-  };
+    TodoStore.addChangeListener(() => { _onChange() });
+  })
 
   const _destroy = (e: any) => {
     var id: string = e.target.parentNode.id;
@@ -33,16 +30,18 @@ const TodoApp = () => {
   };
 
   const _onChange = () => {
-    setTodos(getTodoState)
+    var tmp = getTodoState()
+    tmp = {...tmp}
+    setTodos(tmp)
   }
 
   var todoElements = [];
 
   for(var key in todos) {
     todoElements.push(
-        <li key={ key }>
+        <li key={ key } id={ todos[key].id }>
         <span style={{ marginRight: "30px" }}>{ todos[key].text }</span>
-        <button onClick={ (e) => _destroy(e) }>&:times;</button>
+        <button onClick={ (e) => _destroy(e) }>&times;</button>
         </li>
         )
   };
